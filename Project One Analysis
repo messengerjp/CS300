@@ -1,0 +1,65 @@
+Runtime Analysis: 
+Vector:
+
+Code	Line Cost	# Times Executes	Total Cost
+Vector<Course> courseVector	1	1	1
+
+OPEN FILE filename
+	1	1	1
+WHILE NOT END OF FILE	N	1	N
+READ LINE FROM FILE	1	N	N
+SPLIT(line, ",")	M	N	Nm
+IF tokens.size < 2	1	N	N
+PRINT "Error: Invalid format"	1	Rare	1
+Extract courseNum, title, prereqs	M	N	Nm
+Create new Course	1	N	N
+courseVector.add(newCourse)	1	N	N
+
+Close File
+1	1	1
+Total Cost	Nm + n + 1
+Runtime	O(nm)
+
+ 
+HashTable:
+Code	Line Cost	# Times Executes	Total Cost
+HashTable<String, Course>	1	1	1
+
+OPEN FILE filename
+	1	1	1
+WHILE NOT END OF FILE	N	1	N
+READ LINE FROM FILE	1	N	N
+SPLIT(line, ",")	M	N	Nm
+IF tokens.size < 2	1	N	N
+PRINT "Error: Invalid format"	1	Rare	1
+Extract courseNum, title, prereqs	M	N	Nm
+Create new Course	1	N	N
+courseTable.put(courseNum, newCourse)	1	N	N
+
+Close File
+1	1	1
+Total Cost	Nm + n + 1
+Runtime	O(nm)
+
+
+Binary Search Tree:
+Code	Line Cost	# Times Executes	Total Cost
+Tree<Course>	1	1	1
+
+OPEN FILE filename
+	1	1	1
+WHILE NOT END OF FILE	N	1	N
+READ LINE FROM FILE	1	N	N
+SPLIT(line, ",")	M	N	Nm
+IF tokens.size < 2	1	N	N
+Extract courseNum, title, prereqs	M	N	Nm
+courseTree.insertCourse(newCourse)	Log n	N	N log n
+
+Close File
+1	1	1
+Total Cost	Nm + n + 1 + n log n
+Runtime	O(nm + n log n)
+
+ 
+Evaluation:
+Now that I have evaluated vectors, hash tables, and binary search trees (BSTs), I believe that ABCU should utilize BSTs to store their course data. Vectors provide efficient indexing and sorting; however, they suffer from slow insertions and additional sorting before retrieval. Hash tables offer fast lookups and insertions, but do not maintain order between data which creates inefficiency when sorting. In contrast, a BST ensures O(n log n) insertions and searches while allowing for quick traversal O(n) when displaying courses in a sorted order. These reasons are why I believe that a BST is superior in efficiency and functionality and is the optimal choice for storing the course data.
